@@ -1,0 +1,17 @@
+{
+  "name": "52frameschallenge",
+  "version": "0.0.1",
+  "description": "What challenge is it this week?",
+  "main": "server.js",
+  "author": "Steven Winston",
+  "dependencies": {
+    "async": "^2.0.1",
+    "express": "latest",
+    "google-spreadsheet": "^2.0.3",
+    "http": "0.0.0",
+    "jade": "^1.11.0",
+    "moment": "^2.14.1",
+    "path": "^0.12.7",
+    "socket-io": "0.0.0"
+  }
+}

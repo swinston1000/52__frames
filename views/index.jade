@@ -1,0 +1,12 @@
+extends layout
+
+block extrahead
+  script(src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js")
+    
+block content
+  p#challenge
+  button.btn#send expiry
+
+block body_end
+  script(src='socket.io/socket.io.js')
+  script(src='/javascripts/index.js')
