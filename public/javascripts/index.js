@@ -1,8 +1,10 @@
 
 var socket = io();
+var emit = true
 
 // on every message recived update view
 socket.on('notification', function (data) {
+  emit = true; //wait for the next expiry
   $('#challenge').html(data.challenge);
 
   var deadline = moment.tz(data.deadline, "America/New_York");
@@ -12,8 +14,11 @@ socket.on('notification', function (data) {
   $('#clock').countdown(deadline.toDate(), function(event) {
     $(this).html(event.strftime('%D days %H:%M:%S'))
     .on("finish.countdown", function(){
-      console.log("hi");
-      socket.emit('expiry', "timesup");
+      //for some reason there are multiple events but we only want to fire the expiry once.
+      if(emit)  {
+        socket.emit('expiry', "times_is_up");
+        emit = false;
+      }
     })
   });
 
