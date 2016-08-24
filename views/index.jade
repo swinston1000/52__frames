@@ -5,8 +5,12 @@ block extrahead
     
 block content
   p#challenge
-  button.btn#send expiry
+  p#error
+  div#clock
 
 block body_end
   script(src='socket.io/socket.io.js')
   script(src='/javascripts/index.js')
+  script(src='/javascripts/moment.min.js')
+  script(src='/javascripts/moment-timezone-with-data.js')
+  script(src='/javascripts/jquery.countdown.js')
