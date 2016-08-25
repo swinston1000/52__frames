@@ -11,6 +11,7 @@ moment.updateLocale('en', {
   }
 });
 
+
 module.exports = function(io) {
 
   router.get('/', function(req, res){
@@ -35,8 +36,11 @@ module.exports = function(io) {
 
     readSheet(weeknumber, function(err,data){
       if(err){
+        //console.log("oh dear: " + err.message);
         io.emit('error', "Something went wrong: " + err.message)
+
       } else {
+        //console.log("Yay!");
         io.emit('notification', data);
       }
     });

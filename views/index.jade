@@ -4,9 +4,13 @@ block extrahead
   script(src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js")
     
 block content
-  p#challenge
-  p#error
-  div#clock
+  div.container
+    div#block
+      h1#challenge
+      p#error
+      p#credit
+      h4#clock
+      
 
 block body_end
   script(src='socket.io/socket.io.js')

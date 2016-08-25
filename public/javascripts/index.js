@@ -6,13 +6,14 @@ var emit = true
 socket.on('notification', function (data) {
   emit = true; //wait for the next expiry
   $('#challenge').html(data.challenge);
+  $('#credit').html("Extra Credit: " + data.credit);
 
   var deadline = moment.tz(data.deadline, "America/New_York");
 
-  console.log(data.deadline);
+  //console.log(data.deadline);
 
   $('#clock').countdown(deadline.toDate(), function(event) {
-    $(this).html(event.strftime('%D days %H:%M:%S'))
+    $(this).html(event.strftime('%-D day%!D, %-H hour%!H, %-M minute%!M and %-S second%!S'))
     .on("finish.countdown", function(){
       //for some reason there are multiple events but we only want to fire the expiry once.
       if(emit)  {
