@@ -2,6 +2,7 @@ var moment = require('moment-timezone');
 var readSheet = require('../readsheet')
 var express = require('express');
 var router = express.Router();
+var googleData = {}
 
 moment.updateLocale('en', {
   week: {
@@ -41,7 +42,12 @@ module.exports = function(io) {
 
       } else {
         //console.log("Yay!");
+        googleData = data;
+        //if page loads before data is ready
         io.emit('notification', data);
+        // setTimeout(function(){io.emit('notification', data);},250)
+        // setTimeout(function(){io.emit('notification', data);},500)
+        // setTimeout(function(){io.emit('notification', data);},1000)
       }
     });
   })
@@ -49,8 +55,11 @@ module.exports = function(io) {
 
   io.on("connection", function(socket)
   {
-    //on page load
-    //for realtime update, broadcast to all clients
+
+
+    //if page loads after data is ready
+    socket.emit('notification', googleData);
+
     socket.on('expiry', function(data){
 
       var localtime = moment().tz("America/New_York")
@@ -60,7 +69,7 @@ module.exports = function(io) {
         if(err){
           io.emit('error', "Something went wrong: " + err.message)
         } else {
-          console.log(data);
+          //console.log(data);
           // //for testing
           // io.emit('notification', {challenge: "hey there"});
           io.emit('notification', data);
